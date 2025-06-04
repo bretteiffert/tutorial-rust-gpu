@@ -12,8 +12,6 @@ set(CMAKE_CUDA_ARCHITECTURES "80")
 
 project(libva CUDA CXX)
 
-#add_executable(bfs bfs.cu)
-
 add_library(va STATIC va.cu)
 install(TARGETS va
     DESTINATION ${CMAKE_INSTALL_PREFIX}

@@ -1,4 +1,4 @@
-const N: i32 = 10000000;
+const N: i32 = 100000000;
 
 // external C and CUDA function called
 extern "C" {
@@ -6,19 +6,19 @@ extern "C" {
 }
 
 fn main() {
-    // prepare data for simple vector add
-    let mut a: Vec<f32> = vec![1.0; N as usize];
-    let mut b: Vec<f32> = vec![4.0; N as usize];
+    // prepare data for vector add
+    let mut a: Vec<f32> = vec![4.0; N as usize];
+    let mut b: Vec<f32> = vec![7.0; N as usize];
     
     // prepare output vector
     let mut out: Vec<f32> = vec![0.0; N as usize];
     
     // call vector add function with Rust Foreign Function Interface
-    // memory transfers and allocations on GPU are included in this C++/CUDA file
+    // memory transfers, allocations, and kernel calls on GPU are included in this C++/CUDA file
     unsafe {
         run_vector_add(a.as_mut_ptr().cast::<f32>(), b.as_mut_ptr().cast::<f32>(), out.as_mut_ptr().cast::<f32>(), N);
     }
-    
+
     // show data passed back to Rust
     // print one element to verify solution
     println!("{:?}", out[100]);
